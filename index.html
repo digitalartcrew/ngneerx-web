@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ngneerx Technology — Engineering Experiences</title>
+  <meta name="description" content="Ngneerx Technology LLC is a web and mobile app development company based in Honolulu, engineering experiences through creativity and next level design." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c14;
+      --surface: #0e1420;
+      --card: #131b2b;
+      --accent: #4f8ef7;
+      --accent2: #a259ff;
+      --text: #e8edf5;
+      --muted: #7a8aa0;
+      --border: #1e2d45;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      background: rgba(8,12,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 32px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* ── Sections ── */
+    section {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 56px;
+    }
+
+    /* ── Services ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    /* ── Apps ── */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .app-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-4px);
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .app-icon {
+      font-size: 2.6rem;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #1a0808, #2d1010);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-name {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .app-platform {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .app-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .app-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .store-badge {
+      display: inline-block;
+      padding: 9px 20px;
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.25);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .store-badge:hover { background: rgba(79,142,247,0.2); }
+
+    /* ── Team ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .team-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .team-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-4px);
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 auto 20px;
+    }
+
+    .team-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .team-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .team-card a {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .team-card a:hover { text-decoration: underline; }
+
+    /* ── About strip ── */
+    .about-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-inner h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .about-inner p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ── Contact ── */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 60px 48px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-box h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 14px 32px;
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .contact-email:hover { background: rgba(79,142,247,0.1); }
+
+    .contact-location {
+      margin-top: 24px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-size: 1rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .contact-box { padding: 40px 24px; }
+      footer { flex-direction: column; text-align: center; padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-logo">Ngneerx</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">Honolulu, Hawaii</div>
+  <h1>Engineering<br><span>Experiences</span></h1>
+  <p>Ngneerx Technology LLC builds web and mobile applications through creativity and next level design.</p>
+  <div class="hero-cta">
+    <a href="#apps" class="btn-primary">Our Apps</a>
+    <a href="#contact" class="btn-outline">Get in Touch</a>
+  </div>
+</div>
+
+<!-- About -->
+<div class="about-strip">
+  <div class="about-inner">
+    <div>
+      <div class="section-tag">About Us</div>
+      <h2>Built in Honolulu, shipped worldwide.</h2>
+      <p>Ngneerx — short for <em>engineering experiences</em> — is a technology company founded on the belief that great software should feel effortless, look stunning, and solve real problems.</p>
+      <p>From consumer mobile apps to full-stack web platforms, we bring ideas to life with precision and care.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Founders</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">iOS<br>Android</div>
+        <div class="stat-label">Platforms</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">HNL</div>
+        <div class="stat-label">Honolulu, HI</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Ideas Shipped</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-tag">What We Do</div>
+  <h2 class="section-title">Full-stack product development</h2>
+  <p class="section-sub">From concept to App Store, we handle design, development, and deployment.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Mobile Apps</h3>
+      <p>Cross-platform iOS and Android apps built with React Native and Expo — native performance, single codebase.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Web Applications</h3>
+      <p>Fast, responsive web apps and marketing sites built with modern frameworks and deployed globally.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3>UI/UX Design</h3>
+      <p>Next level design that puts users first — clean interfaces, thoughtful interactions, and cohesive brand identity.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">☁️</div>
+      <h3>Backend & API</h3>
+      <p>Scalable backends, real-time databases, and third-party integrations to power your product end-to-end.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Apps -->
+<section id="apps">
+  <div class="section-tag">Our Apps</div>
+  <h2 class="section-title">Products we've shipped</h2>
+  <p class="section-sub">Apps built by Ngneerx, available on the App Store and Google Play.</p>
+  <div class="apps-grid">
+    <div class="app-card">
+      <div class="app-header">
+        <div class="app-icon">🎵</div>
+        <div>
+          <div class="app-name">Jam Clash</div>
+          <div class="app-platform">iOS · Android</div>
+        </div>
+      </div>
+      <p>A multiplayer music battle game where teams compete to guess songs from iTunes previews. Play across 8+ genres, unlock categories, and crown the ultimate music champion.</p>
+      <div class="app-links">
+        <a href="https://apps.apple.com/us/app/jam-clash/id6759445060" class="store-badge" target="_blank">App Store</a>
+        <a href="#" class="store-badge">Google Play</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section id="team">
+  <div class="section-tag">The Team</div>
+  <h2 class="section-title">Who we are</h2>
+  <p class="section-sub">Ngneerx was founded by two builders passionate about great software.</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="avatar">DB</div>
+      <h3>Donte Burney</h3>
+      <div class="team-role">Co-Founder</div>
+      <p>Designer, developer, and product thinker with a passion for building beautiful, high-quality software experiences.</p>
+      <a href="https://www.donteburney.com" target="_blank">donteburney.com →</a>
+    </div>
+    <div class="team-card">
+      <div class="avatar">NB</div>
+      <h3>Nicholas Burney</h3>
+      <div class="team-role">Co-Founder</div>
+      <p>Engineer and creator focused on turning ideas into products that people love to use every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-box">
+    <h2>Let's build something.</h2>
+    <p>Have a project in mind? We'd love to hear about it.</p>
+    <a href="mailto:hello@ngneerx.com" class="contact-email">hello@ngneerx.com</a>
+    <p class="contact-location">📍 Honolulu, Hawaii</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Ngneerx Technology LLC</div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2025 Ngneerx Technology LLC. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
